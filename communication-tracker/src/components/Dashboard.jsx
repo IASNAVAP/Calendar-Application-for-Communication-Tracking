@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [meetings, setMeetings] = useState({});
   const [selectedCompany, setSelectedCompany] = useState(null);
+  const [viewCompanyDetails, setViewCompanyDetails] = useState(null);
   const [meetingForm, setMeetingForm] = useState({
     date: "",
     type: "",
@@ -21,6 +22,7 @@ const Dashboard = () => {
     comments: "",
     communicationPeriodicity: "2 weeks",  // Default value
   });
+  const [editCompanyForm, setEditCompanyForm] = useState(null); // New state for editing company
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +79,9 @@ const Dashboard = () => {
     }
   };
 
+ 
+  
+
   // Handle adding a meeting
   const handleAddMeeting = (companyId) => {
     setSelectedCompany(companyId);
@@ -104,14 +109,14 @@ const Dashboard = () => {
       if (meetingForm._id) {
         // If meetingForm has an _id, it's an edit action
         await axios.put(
-          `http://localhost:5000/api/communications/${companyId}/meetings/${meetingForm._id}`,
+          `http://localhost:5000/api/communications/${meetingForm._id}`,
           meetingData
         );
         alert("Meeting updated successfully");
       } else {
         // Otherwise, it's an add action
         await axios.post(
-          `http://localhost:5000/api/communications/${companyId}/meetings`,
+          `http://localhost:5000/api/communications/${companyId}/next-meeting`,
           meetingData
         );
         alert("Meeting added successfully");
@@ -123,6 +128,9 @@ const Dashboard = () => {
       console.error("Error saving meeting:", error);
       alert("Failed to save the meeting.");
     }
+  };
+  const handleViewDetails = (company) => {
+    setViewCompanyDetails(company);
   };
 
   // Handle deleting a company
@@ -137,6 +145,29 @@ const Dashboard = () => {
     }
   };
 
+  // Handle editing company details
+  const handleEditCompany = (company) => {
+    setEditCompanyForm(company); // Set the selected company details for editing
+  };
+
+  // Handle saving edited company details
+  const handleSaveCompany = async () => {
+    try {
+      const updatedCompany = await axios.put(
+        `http://localhost:5000/api/companies/edit/${editCompanyForm._id}`,
+        editCompanyForm
+      );
+      alert("Company updated successfully");
+      setCompanies(companies.map((company) => 
+        company._id === updatedCompany.data._id ? updatedCompany.data : company
+      ));
+      setEditCompanyForm(null); // Close the edit form after saving
+    } catch (error) {
+      console.error("Error updating company:", error);
+      alert("Failed to update the company.");
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <h1>Company Communication Dashboard</h1>
@@ -144,6 +175,7 @@ const Dashboard = () => {
       {/* Add New Company Form */}
       <div className="add-company-form">
         <h2>Add New Company</h2>
+        {/* Form fields for adding a new company */}
         <label>
           Name:
           <input
@@ -250,6 +282,8 @@ const Dashboard = () => {
                       </button>
                     ))}
                     <button onClick={() => handleDeleteCompany(company._id)}>Delete</button>
+                    <button onClick={() => handleEditCompany(company)}>Edit Company</button> 
+                    <button onClick={() => handleViewDetails(company)}>View Details</button>{/* Edit Company Button */}
                   </td>
                 </tr>
               );
@@ -257,6 +291,21 @@ const Dashboard = () => {
           </tbody>
         </table>
       )}
+
+{viewCompanyDetails && (
+  <div className="company-details">
+    <h2>Company Details</h2>
+    <p><strong>Name:</strong> {viewCompanyDetails.name}</p>
+    <p><strong>Location:</strong> {viewCompanyDetails.location}</p>
+    <p><strong>LinkedIn Profile:</strong> {viewCompanyDetails.linkedinProfile}</p>
+    <p><strong>Emails:</strong> {viewCompanyDetails.emails.join(", ")}</p>
+    <p><strong>Phone Numbers:</strong> {viewCompanyDetails.phoneNumbers.join(", ")}</p>
+    <p><strong>Comments:</strong> {viewCompanyDetails.comments}</p>
+    <p><strong>Communication Periodicity:</strong> {viewCompanyDetails.communicationPeriodicity}</p>
+    <button onClick={() => setViewCompanyDetails(null)}>Close</button>
+  </div>
+)}
+
 
       {/* Add/Edit Meeting Form */}
       {selectedCompany && (
@@ -268,6 +317,7 @@ const Dashboard = () => {
               handleSaveMeeting();
             }}
           >
+            {/* Meeting form fields */}
             <label>
               Date:
               <input
@@ -301,6 +351,92 @@ const Dashboard = () => {
             </label>
             <button type="submit">Save</button>
             <button type="button" onClick={() => setSelectedCompany(null)}>
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* Edit Company Form */}
+      {editCompanyForm && (
+        <div className="edit-company-form">
+          <h2>Edit Company</h2>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSaveCompany();
+            }}
+          >
+            <label>
+              Name:
+              <input
+                type="text"
+                value={editCompanyForm.name}
+                onChange={(e) =>
+                  setEditCompanyForm({ ...editCompanyForm, name: e.target.value })
+                }
+                required
+              />
+            </label>
+            <label>
+              Location:
+              <input
+                type="text"
+                value={editCompanyForm.location}
+                onChange={(e) =>
+                  setEditCompanyForm({ ...editCompanyForm, location: e.target.value })
+                }
+                required
+              />
+            </label>
+            <label>
+              LinkedIn Profile:
+              <input
+                type="text"
+                value={editCompanyForm.linkedinProfile}
+                onChange={(e) =>
+                  setEditCompanyForm({ ...editCompanyForm, linkedinProfile: e.target.value })
+                }
+                required
+              />
+            </label>
+            {/* Add other fields for company details */}
+            <label>
+          Emails (comma separated):
+          <input
+            type="text"
+            value={editCompanyForm.emails}
+            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, emails: e.target.value })}
+          />
+        </label>
+        <label>
+          Phone Numbers (comma separated):
+          <input
+            type="text"
+            value={editCompanyForm.phoneNumbers}
+            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, phoneNumbers: e.target.value })}
+          />
+        </label>
+        <label>
+          Comments:
+          <textarea
+            value={editCompanyForm.comments}
+            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, comments: e.target.value })}
+          />
+        </label>
+        <label>
+          Communication Periodicity:
+          <select
+            value={editCompanyForm.communicationPeriodicity}
+            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, communicationPeriodicity: e.target.value })}
+          >
+            <option value="1 week">1 week</option>
+            <option value="2 weeks">2 weeks</option>
+            <option value="1 month">1 month</option>
+          </select>
+        </label>
+            <button type="submit">Save</button>
+            <button type="button" onClick={() => setEditCompanyForm(null)}>
               Cancel
             </button>
           </form>

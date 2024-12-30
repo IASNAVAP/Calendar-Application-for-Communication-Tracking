@@ -6,7 +6,7 @@ import NotificationPanel from "./components/NotificationPanel";
 import UserDashboard from "./components/UserDashboard"; // Import CalendarView
 import Reports from "./components/Reports";
 import LandingPage from "./components/LandingPage";
-
+import "./App.css";
 const App = () => {
   return (
     <Router>
