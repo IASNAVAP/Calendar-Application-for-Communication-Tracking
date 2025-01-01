@@ -124,3 +124,223 @@ button:hover {
 button:focus {
   outline: none;
 }
+
+.modalEdit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.modal-content-Edit {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+}
+.modal-content-Edit label {
+  display: flex;
+  flex-direction: column; /* Ensure label and input are vertically aligned */
+  font-size: 14px; /* Adjust label font size */
+  margin-bottom: 10px; /* Add space between label and input */
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+}
+
+.modal-content-Edit input,
+.modal-content-Edit textarea,
+.modal-content-Edit select {
+  width: 100%; /* Make input elements take full width */
+  padding: 8px; /* Add padding for better input field spacing */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.modal-content-Edit textarea {
+  resize: vertical; /* Allow vertical resizing for textareas */
+}
+
+.modal-content-Edit button {
+  padding: 10px 15px; /* Adjust button padding */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal-content-Edit button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.modal-content-Edit .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+}
+
+.modal-content-Edit h2 {
+  margin-bottom: 20px; 
+  font-size: 18px;
+  text-align: center; 
+}
+
+/*company details*/
+
+.modal-contentD {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center; /* Center the modal horizontally */
+  align-items: center; /* Center the modal vertically */
+  z-index: 1000; /* Higher than any other element */
+  overflow: hidden; /* Prevent scroll */
+}
+
+.modal-contentD-View {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  margin: 0 auto;
+  z-index: 1001; /* Ensure modal content is on top of the background */
+}
+
+.modal-contentD-View h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-contentD-View p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.modal-contentD-View button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: center;
+}
+
+.modal-contentD-View button:hover {
+  background-color: #0056b3;
+}
+
+.modal-contentD-View .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+/*meeting form*/
+
+.modal-contentMeeting {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  z-index: 1000; 
+  overflow: hidden;
+}
+
+.modal-content-Meeting {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  margin: 0 auto;
+  z-index: 1001; 
+}
+
+.modal-content-Meeting h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content-Meeting label {
+  font-size: 14px;
+}
+
+.modal-content-Meeting input {
+  padding: 8px;
+  margin: 5px 0;
+  font-size: 14px;
+  width: 100%;
+}
+
+.modal-content-Meeting button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: center;
+}
+
+.modal-content-Meeting button:hover {
+  background-color: #0056b3;
+}
+
+.modal-content-Meeting .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}

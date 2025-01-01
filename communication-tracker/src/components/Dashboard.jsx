@@ -293,13 +293,13 @@ const Dashboard = () => {
                     ))}
                   </td>
                   <td>
-                    <button onClick={() => handleAddMeeting(company._id)}>Add</button>
+                    <button onClick={() => handleAddMeeting(company._id)}>Add Meeting</button>
                     {companyMeetings.map((meeting, index) => (
                       <button
                         key={index}
                         onClick={() => handleEditMeeting(company._id, meeting)}
                       >
-                        Edit
+                        Edit Meeting
                       </button>
                     ))}
                     <button onClick={() => handleDeleteCompany(company._id)}>Delete</button>
@@ -314,23 +314,30 @@ const Dashboard = () => {
       )}
 
 {viewCompanyDetails && (
-  <div className="company-details">
-    <h2>Company Details</h2>
-    <p><strong>Name:</strong> {viewCompanyDetails.name}</p>
-    <p><strong>Location:</strong> {viewCompanyDetails.location}</p>
-    <p><strong>LinkedIn Profile:</strong> {viewCompanyDetails.linkedinProfile}</p>
-    <p><strong>Emails:</strong> {viewCompanyDetails.emails.join(", ")}</p>
-    <p><strong>Phone Numbers:</strong> {viewCompanyDetails.phoneNumbers.join(", ")}</p>
-    <p><strong>Comments:</strong> {viewCompanyDetails.comments}</p>
-    <p><strong>Communication Periodicity:</strong> {viewCompanyDetails.communicationPeriodicity}</p>
-    <button onClick={() => setViewCompanyDetails(null)}>Close</button>
+  <div className="modal-contentD">
+    <div className="modal-contentD-View">
+      <span className="close" onClick={() => setViewCompanyDetails(null)}>
+        &times;
+      </span>
+      <h2>Company Details</h2>
+      <p><strong>Name:</strong> {viewCompanyDetails.name}</p>
+      <p><strong>Location:</strong> {viewCompanyDetails.location}</p>
+      <p><strong>LinkedIn Profile:</strong> <a href={viewCompanyDetails.linkedinProfile} target="_blank" rel="noopener noreferrer">{viewCompanyDetails.linkedinProfile}</a></p>
+      <p><strong>Emails:</strong> {viewCompanyDetails.emails.join(", ")}</p>
+      <p><strong>Phone Numbers:</strong> {viewCompanyDetails.phoneNumbers.join(", ")}</p>
+      <p><strong>Comments:</strong> {viewCompanyDetails.comments}</p>
+      <p><strong>Communication Periodicity:</strong> {viewCompanyDetails.communicationPeriodicity}</p>
+      <button onClick={() => setViewCompanyDetails(null)}>Close</button>
+    </div>
   </div>
 )}
 
 
+
       {/* Add/Edit Meeting Form */}
       {selectedCompany && (
-        <div className="meeting-form">
+        <div className="modal-contentMeeting">
+        <div className="modal-content-Meeting">
           <h2>{meetingForm._id ? "Edit Meeting" : "Add Meeting"}</h2>
           <form
             onSubmit={(e) => {
@@ -361,99 +368,125 @@ const Dashboard = () => {
                 required
               />
             </label>
-           
+            
             <button type="submit">Save</button>
             <button type="button" onClick={() => setSelectedCompany(null)}>
               Cancel
             </button>
           </form>
         </div>
+      </div>
       )}
 
       {/* Edit Company Form */}
       {editCompanyForm && (
-        <div className="edit-company-form">
-          <h2>Edit Company</h2>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSaveCompany();
-            }}
-          >
-            <label>
-              Name:
-              <input
-                type="text"
-                value={editCompanyForm.name}
-                onChange={(e) =>
-                  setEditCompanyForm({ ...editCompanyForm, name: e.target.value })
-                }
-                required
-              />
-            </label>
-            <label>
-              Location:
-              <input
-                type="text"
-                value={editCompanyForm.location}
-                onChange={(e) =>
-                  setEditCompanyForm({ ...editCompanyForm, location: e.target.value })
-                }
-                required
-              />
-            </label>
-            <label>
-              LinkedIn Profile:
-              <input
-                type="text"
-                value={editCompanyForm.linkedinProfile}
-                onChange={(e) =>
-                  setEditCompanyForm({ ...editCompanyForm, linkedinProfile: e.target.value })
-                }
-                required
-              />
-            </label>
-            {/* Add other fields for company details */}
-            <label>
-          Emails (comma separated):
-          <input
-            type="text"
-            value={editCompanyForm.emails}
-            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, emails: e.target.value })}
-          />
-        </label>
-        <label>
-          Phone Numbers (comma separated):
-          <input
-            type="text"
-            value={editCompanyForm.phoneNumbers}
-            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, phoneNumbers: e.target.value })}
-          />
-        </label>
-        <label>
-          Comments:
-          <textarea
-            value={editCompanyForm.comments}
-            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, comments: e.target.value })}
-          />
-        </label>
-        <label>
-          Communication Periodicity:
-          <select
-            value={editCompanyForm.communicationPeriodicity}
-            onChange={(e) => setEditCompanyForm({ ...editCompanyForm, communicationPeriodicity: e.target.value })}
-          >
-            <option value="1 week">1 week</option>
-            <option value="2 weeks">2 weeks</option>
-            <option value="1 month">1 month</option>
-          </select>
-        </label>
-            <button type="submit">Save</button>
-            <button type="button" onClick={() => setEditCompanyForm(null)}>
-              Cancel
-            </button>
-          </form>
-        </div>
+         <div className="modalEdit">
+          {console.log("Modal rendered")}
+         <div className="modal-content-Edit">
+           <span className="close" onClick={() => setEditCompanyForm(null)}>
+             &times;
+           </span>
+           <h2>Edit Company</h2>
+           <form
+             onSubmit={(e) => {
+               e.preventDefault();
+               handleSaveCompany();
+             }}
+           >
+             <label>
+               Name:
+               <input
+                 type="text"
+                 value={editCompanyForm.name}
+                 onChange={(e) =>
+                   setEditCompanyForm({ ...editCompanyForm, name: e.target.value })
+                 }
+                 required
+               />
+             </label>
+             <label>
+               Location:
+               <input
+                 type="text"
+                 value={editCompanyForm.location}
+                 onChange={(e) =>
+                   setEditCompanyForm({ ...editCompanyForm, location: e.target.value })
+                 }
+                 required
+               />
+             </label>
+             <label>
+               LinkedIn Profile:
+               <input
+                 type="text"
+                 value={editCompanyForm.linkedinProfile}
+                 onChange={(e) =>
+                   setEditCompanyForm({
+                     ...editCompanyForm,
+                     linkedinProfile: e.target.value,
+                   })
+                 }
+                 required
+               />
+             </label>
+             <label>
+               Emails (comma separated):
+               <input
+                 type="text"
+                 value={editCompanyForm.emails}
+                 onChange={(e) =>
+                   setEditCompanyForm({ ...editCompanyForm, emails: e.target.value })
+                 }
+               />
+             </label>
+             <label>
+               Phone Numbers (comma separated):
+               <input
+                 type="text"
+                 value={editCompanyForm.phoneNumbers}
+                 onChange={(e) =>
+                   setEditCompanyForm({
+                     ...editCompanyForm,
+                     phoneNumbers: e.target.value,
+                   })
+                 }
+               />
+             </label>
+             <label>
+               Comments:
+               <textarea
+                 value={editCompanyForm.comments}
+                 onChange={(e) =>
+                   setEditCompanyForm({
+                     ...editCompanyForm,
+                     comments: e.target.value,
+                   })
+                 }
+               />
+             </label>
+             <label>
+               Communication Periodicity:
+               <select
+                 value={editCompanyForm.communicationPeriodicity}
+                 onChange={(e) =>
+                   setEditCompanyForm({
+                     ...editCompanyForm,
+                     communicationPeriodicity: e.target.value,
+                   })
+                 }
+               >
+                 <option value="1 week">1 week</option>
+                 <option value="2 weeks">2 weeks</option>
+                 <option value="1 month">1 month</option>
+               </select>
+             </label>
+             <button type="submit">Save</button>
+             <button type="button" onClick={() => setEditCompanyForm(null)}>
+               Cancel
+             </button>
+           </form>
+         </div>
+       </div>
       )}
       <div style={{ marginTop: "20px" }}>
       <CommunicationMethods />
