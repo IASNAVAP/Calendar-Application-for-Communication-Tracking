@@ -1,37 +1,18 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.header {
-  background-color: #007bff;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
 .user-dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   background-color: #f0f8ff;
-  width: 100%;
 }
 
 h1 {
   color: #007bff;
+}
+
+.react-calendar__tile{
+  background-color: white;
+  color: black;
 }
 
 .calendar-container {
@@ -39,21 +20,17 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  width: 100%;
 }
 
 .meeting-summary {
   background-color: rgba(0, 123, 255, 0.2);
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .meeting-item {
-  font-size: 14px;
+  font-size: 12px;
   color: #333;
-  margin-bottom: 5px;
 }
 
 .meeting-details {
@@ -63,49 +40,98 @@ h1 {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 400px;
+}
+/* Highlight today's date */
+.highlight-today {
+background-color: #91d5e7 !important; 
+color: #000;
+font-weight: bold; 
+border-radius: 50%; 
 }
 
-button {
+/* Meeting date styling (optional, if needed) */
+.meeting-date {
+background-color: rgba(0, 123, 255, 0.2);
+border-radius: 5px;
+color: #333;
+}
+
+/* Default style for calendar tiles */
+.react-calendar__tile {
+position: relative;
+padding: 10px;
+font-size: 14px;
+border-radius: 5px;
+transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+
+.react-calendar__tile:hover {
+transform: scale(1.1); /* Slight zoom effect */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+background-color: rgba(0, 123, 255, 0.1); /* Light blue background */
+cursor: pointer;
+}
+
+.react-calendar__tile.highlight-today:hover {
+background-color: #ffcccb; 
+box-shadow: 0 4px 12px rgba(255, 0, 0, 0.1); 
+transform: scale(1.2); 
+color: #000; 
+}
+
+.react-calendar__tile.meeting-date:hover {
+background-color: rgba(0, 255, 0, 0.2); 
+box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3); 
+transform: scale(1.1); 
+color: #333; 
+}
+
+
+/* button {
   padding: 10px 20px;
-  background-color: aliceblue;
-  color: black;
-  border: #333;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.table th, .table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.table th {
   background-color: #007bff;
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+/* button:hover {
+  background-color: #0056b3;
+} */
+
+.light-green {
+  background-color: #d4edda;
 }
 
-.table tr:hover {
-  background-color: #f1f1f1;
+.light-red {
+  background-color: #f8d7da;
 }
 
-.highlight-red {
-  background-color: rgba(255, 0, 0, 0.2);
+.light-yellow {
+  background-color: #fff3cd;
 }
 
-.highlight-yellow {
-  background-color: rgba(255, 255, 0, 0.2);
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.popup form {
+  display: flex;
+  flex-direction: column;
+}
+.popup label {
+  margin-bottom: 10px;
+}
+.popup button {
+  margin: 5px 0;
 }

@@ -8,6 +8,7 @@ const companyRoutes = require('./routes/company');
 const communicationMethodRoutes = require('./routes/communicationMethod');
 const communicationRoutes = require("./routes/communications");
 const calenderRoutes = require('./routes/Calender');
+const reportRoutes = require('./routes/Report');
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.use("/api/communications", communicationRoutes);
 app.use('/api/companies', companyRoutes);
 app.use('/api/communication-methods', communicationMethodRoutes);
 app.use("/api/calendar", calenderRoutes);
+app.use('/api/report', reportRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Dashboard.css";
+import CommunicationMethods from "./CommunicationMethods";
+
+
 
 const Dashboard = () => {
   const [companies, setCompanies] = useState([]);
@@ -171,6 +174,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <h1>Company Communication Dashboard</h1>
+    
 
       {/* Add New Company Form */}
       <div className="add-company-form">
@@ -283,7 +287,7 @@ const Dashboard = () => {
                     ))}
                     <button onClick={() => handleDeleteCompany(company._id)}>Delete</button>
                     <button onClick={() => handleEditCompany(company)}>Edit Company</button> 
-                    <button onClick={() => handleViewDetails(company)}>View Details</button>{/* Edit Company Button */}
+                    <button onClick={() => handleViewDetails(company)}>View Details</button>
                   </td>
                 </tr>
               );
@@ -340,15 +344,7 @@ const Dashboard = () => {
                 required
               />
             </label>
-            <label>
-              Notes:
-              <textarea
-                value={meetingForm.notes}
-                onChange={(e) =>
-                  setMeetingForm({ ...meetingForm, notes: e.target.value })
-                }
-              />
-            </label>
+           
             <button type="submit">Save</button>
             <button type="button" onClick={() => setSelectedCompany(null)}>
               Cancel
@@ -442,6 +438,9 @@ const Dashboard = () => {
           </form>
         </div>
       )}
+      <div style={{ marginTop: "20px" }}>
+      <CommunicationMethods />
+      </div>
     </div>
   );
 };

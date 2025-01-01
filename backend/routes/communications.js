@@ -77,4 +77,14 @@ router.put("/:communicationId", async (req, res) => {
   }
 });
 
+router.delete('/delete/:id', async (req, res) => {
+  console.log(req.params.id);
+  try {
+    await Communication.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Company deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

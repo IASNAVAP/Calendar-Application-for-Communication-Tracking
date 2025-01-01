@@ -2,9 +2,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
-import NotificationPanel from "./components/NotificationPanel";
-import UserDashboard from "./components/UserDashboard"; // Import CalendarView
-import Reports from "./components/Reports";
+import UserDashboard from "./components/UserDashboard";
+import Report from "./components/Report";
+
 import LandingPage from "./components/LandingPage";
 import "./App.css";
 const App = () => {
@@ -13,8 +13,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/admin-dashboard" element={<Dashboard />} />
-        <Route path="/user-dashboard" element={<UserDashboard />} />  {/* Route to CalendarView */}
-        <Route path="/reports" element={<Reports />} />
+        <Route path="/user-dashboard" element={<UserDashboard />} /> 
+        <Route path="/report" element={<Report />} />
+
       </Routes>
     </Router>
   );

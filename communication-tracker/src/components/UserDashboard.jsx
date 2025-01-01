@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Calendar from "react-calendar";
-import UserTableView from "./UserTableView"; // Import the new UserTableView component
+import UserTableView from "./UserTableView";
+import Notifications from "./Notifications"; // Import the new Notifications component
 import "./UserDashboard.css";
+import { Link } from 'react-router-dom';
 
-// Helper function to format date as YYYY-MM-DD
 const formatDate = (date) => {
   const d = new Date(date);
   const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0'); // Add leading zero for single digit months
-  const day = String(d.getDate()).padStart(2, '0'); // Add leading zero for single digit days
-
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
 
@@ -19,7 +19,7 @@ const UserDashboard = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [meetingData, setMeetingData] = useState([]);
 
-  // Fetch combined calendar data (both past and scheduled communications) from the backend
+  // Fetch combined calendar data
   useEffect(() => {
     const fetchCalendarData = async () => {
       try {
@@ -29,37 +29,31 @@ const UserDashboard = () => {
         console.error("Error fetching calendar data:", error);
       }
     };
-
     fetchCalendarData();
   }, []);
 
-  // Get the communications (meetings) for the selected date
   const getCommunicationsForDate = (date) => {
-    const formattedDate = formatDate(date); // Format date as YYYY-MM-DD
-    return calendarData.filter((comm) => {
-      const meetingDate = formatDate(comm.date); // Format communication date
-      return meetingDate === formattedDate;
-    }).map((comm) => ({
-      companyName: comm.companyName,
-      type: comm.type,
-      notes: comm.notes,
-      date: comm.date,
-      status: new Date(comm.date) < new Date() ? "Completed" : "Scheduled"
-    }));
+    const formattedDate = formatDate(date);
+    return calendarData
+      .filter((comm) => formatDate(comm.date) === formattedDate)
+      .map((comm) => ({
+        companyName: comm.companyName,
+        type: comm.type,
+        notes: comm.notes,
+        date: comm.date,
+        status:comm.status,
+      }));
   };
 
-  // Handle date selection
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
-  // Get the meetings data for the selected date
   useEffect(() => {
     setMeetingData(getCommunicationsForDate(selectedDate));
   }, [selectedDate, calendarData]);
 
-  // Custom tile content to display meetings on each date block
-  const tileContent = ({ date, view }) => {
+  const tileContent = ({ date }) => {
     const meetingsForDay = getCommunicationsForDate(date);
     if (meetingsForDay.length > 0) {
       return (
@@ -78,6 +72,10 @@ const UserDashboard = () => {
   return (
     <div className="user-dashboard">
       <h1>User Dashboard</h1>
+
+      {/* Notifications Component */}
+      <Notifications calendarData={calendarData} />
+
       <div className="calendar-container">
         <Calendar
           onChange={handleDateChange}
@@ -101,8 +99,11 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      {/* User Table View (without Edit/Add functionality) */}
-      <UserTableView userId={1} /> {/* Assuming userId or any other needed prop */}
+      <UserTableView userId={1} />
+      <Link to="/report">
+        <button>View Communication Frequency Report</button>
+      </Link>
+
     </div>
   );
 };

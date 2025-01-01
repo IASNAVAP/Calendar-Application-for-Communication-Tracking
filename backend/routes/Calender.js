@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   try {
     const companies = await Company.find();
     const scheduledCommunications = await Communication.find();
-
+   
     // Combine both last communications and scheduled communications
     const calendarData = [];
 
@@ -21,22 +21,24 @@ router.get("/", async (req, res) => {
             type: comm.type,
             notes: comm.notes,
             companyName: company.name,
-            status: comm.date < new Date() ? "Completed" : "Scheduled", // Completed if the meeting date is in the past
+            status:  "Completed" , // Completed if the meeting date is in the past
           });
         });
       }
     });
 
+
     // Scheduled communications (future)
-    scheduledCommunications.forEach((comm) => {
+    for (const comm of scheduledCommunications) {
+      const company = await Company.findById(comm.companyId); // Wait for the promise to resolve
       calendarData.push({
         date: comm.date,
         type: comm.type,
         notes: comm.notes,
-        companyName: comm.companyId.name, // Assuming companyId is referenced in Communication model
-        status: comm.date < new Date() ? "Completed" : "Scheduled",
+        companyName: company.name, // Use the resolved company data
+        status: "Scheduled",
       });
-    });
+    }
 
     // Sort all communications by date
     calendarData.sort((a, b) => new Date(a.date) - new Date(b.date));
