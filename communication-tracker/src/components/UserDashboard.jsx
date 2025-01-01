@@ -71,11 +71,10 @@ const UserDashboard = () => {
 
   return (
     <div className="user-dashboard">
-      <h1>User Dashboard</h1>
-
-      {/* Notifications Component */}
+      <div style={{display:'flex', justifyContent:'space-between', width: '100%'}}>
+      <h1 style={{marginLeft:'600px'}}>User Dashboard</h1>
       <Notifications calendarData={calendarData} />
-
+      </div>
       <div className="calendar-container">
         <Calendar
           onChange={handleDateChange}

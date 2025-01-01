@@ -56,4 +56,71 @@
     transition: opacity 0.3s;
     width: 200px;
   }
-  
+/* Basic modal styling */
+.modal.show {
+  display: flex;  /* Show modal when the 'show' class is applied */
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;  /* Initially hidden */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content styling */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  transition: transform 0.3s ease-in-out; /* Smooth hover transition */
+}
+
+/* Hover effect on the modal content */
+.modal-content:hover {
+  transform: scale(1.05); /* Slightly enlarge the modal */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+}
+
+/* Styling for form inside the modal */
+.add-company-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-company-form label{
+  margin: 10px 0;
+}
+.add-company-form input,
+.add-company-form textarea {
+  padding: 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 95%;
+}
+/* Buttons */
+button {
+  margin: 10px;
+  padding: 8px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Close button */
+button:focus {
+  outline: none;
+}

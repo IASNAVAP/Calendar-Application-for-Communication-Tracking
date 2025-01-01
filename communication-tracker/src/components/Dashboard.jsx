@@ -6,6 +6,7 @@ import CommunicationMethods from "./CommunicationMethods";
 
 
 const Dashboard = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [meetings, setMeetings] = useState({});
@@ -26,7 +27,7 @@ const Dashboard = () => {
     communicationPeriodicity: "2 weeks",  // Default value
   });
   const [editCompanyForm, setEditCompanyForm] = useState(null); // New state for editing company
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,7 +54,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isModalVisible]);
 
   // Handle adding a new company
   const handleAddCompany = async () => {
@@ -75,6 +76,7 @@ const Dashboard = () => {
     try {
       await axios.post("http://localhost:5000/api/companies/add", newCompany);
       alert("New company added successfully");
+      setShowModal(false);
       window.location.reload(); // Refresh data after adding company
     } catch (error) {
       console.error("Error adding company:", error);
@@ -177,69 +179,84 @@ const Dashboard = () => {
     
 
       {/* Add New Company Form */}
-      <div className="add-company-form">
-        <h2>Add New Company</h2>
-        {/* Form fields for adding a new company */}
-        <label>
-          Name:
-          <input
-            type="text"
-            value={newCompanyForm.name}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, name: e.target.value })}
-          />
-        </label>
-        <label>
-          Location:
-          <input
-            type="text"
-            value={newCompanyForm.location}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, location: e.target.value })}
-          />
-        </label>
-        <label>
-          LinkedIn Profile:
-          <input
-            type="text"
-            value={newCompanyForm.linkedinProfile}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, linkedinProfile: e.target.value })}
-          />
-        </label>
-        <label>
-          Emails (comma separated):
-          <input
-            type="text"
-            value={newCompanyForm.emails}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, emails: e.target.value })}
-          />
-        </label>
-        <label>
-          Phone Numbers (comma separated):
-          <input
-            type="text"
-            value={newCompanyForm.phoneNumbers}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, phoneNumbers: e.target.value })}
-          />
-        </label>
-        <label>
-          Comments:
-          <textarea
-            value={newCompanyForm.comments}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, comments: e.target.value })}
-          />
-        </label>
-        <label>
-          Communication Periodicity:
-          <select
-            value={newCompanyForm.communicationPeriodicity}
-            onChange={(e) => setNewCompanyForm({ ...newCompanyForm, communicationPeriodicity: e.target.value })}
-          >
-            <option value="1 week">1 week</option>
-            <option value="2 weeks">2 weeks</option>
-            <option value="1 month">1 month</option>
-          </select>
-        </label>
-        <button onClick={handleAddCompany}>Add Company</button>
-      </div>
+      <div>
+      <button onClick={() => { 
+        setShowModal(true); 
+        setIsModalVisible(true);
+      }}>Add New Company</button>
+
+      {/* Modal */}
+      {showModal && (
+        <div className={`modal ${showModal ? "show" : ""}`}>
+          <div className="modal-content">
+            <div className="add-company-form">
+              <h2>Add New Company</h2>
+              {/* Form fields for adding a new company */}
+              <label>
+                Name:
+                <input
+                  type="text"
+                  value={newCompanyForm.name}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, name: e.target.value })}
+                />
+              </label>
+              <label>
+                Location:
+                <input
+                  type="text"
+                  value={newCompanyForm.location}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, location: e.target.value })}
+                />
+              </label>
+              <label>
+                LinkedIn Profile:
+                <input
+                  type="text"
+                  value={newCompanyForm.linkedinProfile}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, linkedinProfile: e.target.value })}
+                />
+              </label>
+              <label>
+                Emails (comma separated):
+                <input
+                  type="text"
+                  value={newCompanyForm.emails}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, emails: e.target.value })}
+                />
+              </label>
+              <label>
+                Phone Numbers (comma separated):
+                <input
+                  type="text"
+                  value={newCompanyForm.phoneNumbers}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, phoneNumbers: e.target.value })}
+                />
+              </label>
+              <label>
+                Comments:
+                <textarea
+                  value={newCompanyForm.comments}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, comments: e.target.value })}
+                />
+              </label>
+              <label>
+                Communication Periodicity:
+                <select
+                  value={newCompanyForm.communicationPeriodicity}
+                  onChange={(e) => setNewCompanyForm({ ...newCompanyForm, communicationPeriodicity: e.target.value })}
+                >
+                  <option value="1 week">1 week</option>
+                  <option value="2 weeks">2 weeks</option>
+                  <option value="1 month">1 month</option>
+                </select>
+              </label>
+              <button onClick={handleAddCompany}>Add Company</button>
+              <button onClick={() => setShowModal(false)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
 
       {loading ? (
         <p>Loading companies...</p>
