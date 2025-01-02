@@ -15,7 +15,7 @@ const SimpleCalendar = () => {
     // Fetch events from the API
     const fetchEvents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/calendar");
+        const response = await fetch("https://calendar-application-for-communication-63gi.onrender.com/api/calendar");
         const fetchedEvents = await response.json();
 
         // Map events to the format required by react-big-calendar

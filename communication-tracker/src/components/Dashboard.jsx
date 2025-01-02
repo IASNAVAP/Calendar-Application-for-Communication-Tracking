@@ -29,12 +29,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/companies");
+        const response = await axios.get("https://calendar-application-for-communication-63gi.onrender.com/api/companies");
         const companiesData = response.data;
 
         const meetingPromises = companiesData.map(async (company) => {
           const meetingResponse = await axios.get(
-            `http://localhost:5000/api/communications/${company._id}/meetings`
+            `https://calendar-application-for-communication-63gi.onrender.com/api/communications/${company._id}/meetings`
           );
           return { [company._id]: meetingResponse.data };
         });
@@ -80,7 +80,7 @@ const Dashboard = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/companies/add", newCompany);
+      await axios.post("https://calendar-application-for-communication-63gi.onrender.com/api/companies/add", newCompany);
       alert("New company added successfully");
       setShowModal(false);
       window.location.reload(); // Refresh data after adding company
@@ -117,14 +117,14 @@ const Dashboard = () => {
       if (meetingForm._id) {
         // If meetingForm has an _id, it's an edit action
         await axios.put(
-          `http://localhost:5000/api/communications/${meetingForm._id}`,
+          `https://calendar-application-for-communication-63gi.onrender.com/api/communications/${meetingForm._id}`,
           meetingData
         );
         alert("Meeting updated successfully");
       } else {
         // Otherwise, it's an add action
         await axios.post(
-          `http://localhost:5000/api/communications/${companyId}/next-meeting`,
+          `https://calendar-application-for-communication-63gi.onrender.com/api/communications/${companyId}/next-meeting`,
           meetingData
         );
         alert("Meeting added successfully");
@@ -145,7 +145,7 @@ const Dashboard = () => {
   const handleDeleteCompany = async (companyId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/companies/delete/${companyId}`
+        `https://calendar-application-for-communication-63gi.onrender.com/api/companies/delete/${companyId}`
       );
       alert("Company deleted successfully");
       window.location.reload(); // Refresh data after deleting company
@@ -164,7 +164,7 @@ const Dashboard = () => {
   const handleSaveCompany = async () => {
     try {
       const updatedCompany = await axios.put(
-        `http://localhost:5000/api/companies/edit/${editCompanyForm._id}`,
+        `https://calendar-application-for-communication-63gi.onrender.com/api/companies/edit/${editCompanyForm._id}`,
         editCompanyForm
       );
       alert("Company updated successfully");

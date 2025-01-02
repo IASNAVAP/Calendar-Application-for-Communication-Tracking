@@ -13,12 +13,12 @@ const UserTableView = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/companies");
+        const response = await axios.get("https://calendar-application-for-communication-63gi.onrender.com/api/companies");
         const companiesData = response.data;
 
         const meetingPromises = companiesData.map(async (company) => {
           const meetingResponse = await axios.get(
-            `http://localhost:5000/api/communications/${company._id}/meetings`
+            `https://calendar-application-for-communication-63gi.onrender.com/api/communications/${company._id}/meetings`
           );
           return { [company._id]: meetingResponse.data };
         });
@@ -55,12 +55,12 @@ const UserTableView = ({ userId }) => {
       ];
 
       // Update the company with the new communication
-      await axios.put(`http://localhost:5000/api/companies/edit/${company._id}`, {
+      await axios.put(`https://calendar-application-for-communication-63gi.onrender.com/api/companies/edit/${company._id}`, {
         lastCommunications: updatedCommunications,
       });
 
       // Delete the completed meeting
-      await axios.delete(`http://localhost:5000/api/communications/delete/${meeting._id}`);
+      await axios.delete(`https://calendar-application-for-communication-63gi.onrender.com/api/communications/delete/${meeting._id}`);
 
       // Update the state
       setCompanies((prev) =>

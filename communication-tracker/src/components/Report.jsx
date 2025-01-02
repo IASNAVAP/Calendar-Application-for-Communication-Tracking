@@ -24,7 +24,7 @@ const Report = () => {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get('http://localhost:5000/api/report/communication-frequency')
+      .get('https://calendar-application-for-communication-63gi.onrender.com/api/report/communication-frequency')
       .then((response) => {
         const fetchedData = response.data;
 

@@ -14,7 +14,7 @@ const OverdueTrends = () => {
     const currentDate = new Date();
 
     axios
-      .get('http://localhost:5000/api/calendar/')
+      .get('https://calendar-application-for-communication-63gi.onrender.com/api/calendar/')
       .then((response) => {
         const data = response.data;
 

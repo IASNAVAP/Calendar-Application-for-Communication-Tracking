@@ -11,7 +11,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchCalendarData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/calendar");
+        const response = await axios.get("https://calendar-application-for-communication-63gi.onrender.com/api/calendar");
         setCalendarData(response.data);
       } catch (error) {
         console.error("Error fetching calendar data:", error);

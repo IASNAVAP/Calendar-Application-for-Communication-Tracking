@@ -14,7 +14,7 @@ const CommunicationMethods = () => {
 
   const fetchCommunicationMethods = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/communication-methods'); // Update with your API endpoint
+      const response = await axios.get('https://calendar-application-for-communication-63gi.onrender.com/api/communication-methods'); // Update with your API endpoint
       // Ensure the response is an array
       const data = Array.isArray(response.data) ? response.data : [];
       setMethods(data);
