@@ -1,0 +1,114 @@
+/* Calendar Container */
+.calendar-container {
+
+    height: 500px;
+    margin: 0 auto;
+    padding: 10px; /* Add some padding for better spacing */
+  }
+  
+  /* Remove the shadow under the number in the calendar */
+  .rbc-day-bg {
+    box-shadow: none; /* Remove shadow */
+  }
+
+  /* General Styling for Events */
+ 
+  
+  /* Event Title */
+  .rbc-event-label {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Styling for Completed Events */
+.rbc-events.completed {
+    background-color: #28a745; /* Green for Completed */
+    border: 1px solid #218838;
+    border-radius: 4px;
+  }
+  
+  /* Styling for Scheduled Events */
+  .rbc-events.scheduled {
+    background-color: #007bff; /* Blue for Scheduled */
+    border: 1px solid #0056b3;
+    border-radius: 4px;
+  }
+  .rbc-event {
+    background-color: transparent !important;
+  }
+  
+  /* Hover Effect on Events */
+  .rbc-event:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  
+  /* Month View Event Size */
+  .rbc-month-view .rbc-event {
+    font-size: 13px;
+    padding: 5px;
+  }
+  
+  /* Adjust the month view grid to better utilize width */
+  .rbc-month-view .rbc-day-bg {
+    width: auto; /* Allow days to take up available space */
+    padding: 10px; /* Adjust padding for better layout */
+  }
+  
+  .rbc-button-link {
+    box-shadow: none;
+  }
+  
+  /* Custom Event Popup */
+
+  
+  /* Custom Popup Content */
+  .custom-event-popup-content h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .custom-event-popup-content p {
+    margin: 0;
+  }
+  
+  .custom-event-popup-content strong {
+    color: #000000;
+  }
+  .rbc-event {
+    position: relative;
+    z-index: 10;  /* Ensure events are above other elements */
+  }
+  
+  /* Popup Styling */
+  .custom-event-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure popup is above other elements */
+  }  
+
+  .today-events {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .today-events h3 {
+    margin-bottom: 10px;
+  }
+  
+  .today-events ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .today-events li {
+    margin: 5px 0;
+  }
+  

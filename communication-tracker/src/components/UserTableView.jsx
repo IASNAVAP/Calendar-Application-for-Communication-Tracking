@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./UserDashboard.css";
+import { Link } from 'react-router-dom';
 
 const UserTableView = ({ userId }) => {
   const [companies, setCompanies] = useState([]);
@@ -188,6 +189,9 @@ const UserTableView = ({ userId }) => {
           </form>
         </div>
       )}
+       <Link to="/report">
+        <button>View Communication Frequency Report</button>
+      </Link>
     </div>
   );
 };

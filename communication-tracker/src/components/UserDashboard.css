@@ -1,137 +1,87 @@
-.user-dashboard {
-  display: flex;
+/* .user-dashboard {
+
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: #f0f8ff;
-}
+  background: linear-gradient(135deg, #f3f4f7, #e9eff3);
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+} */
 
 h1 {
   color: #007bff;
-}
-
-.react-calendar__tile{
-  background-color: white;
-  color: black;
-}
-
-.calendar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  font-size: 2rem;
+  margin: 20px 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .meeting-summary {
-  background-color: rgba(0, 123, 255, 0.2);
+  background-color: rgba(0, 123, 255, 0.1);
   padding: 5px;
   border-radius: 5px;
+  margin-top: 5px;
 }
 
-.meeting-item {
+.meeting-summary span {
   font-size: 12px;
   color: #333;
 }
 
 .meeting-details {
   margin-top: 20px;
-  background-color: #fff;
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
-}
-/* Highlight today's date */
-.highlight-today {
-background-color: #91d5e7 !important; 
-color: #000;
-font-weight: bold; 
-border-radius: 50%; 
+  max-width: 600px;
 }
 
-/* Meeting date styling (optional, if needed) */
-.meeting-date {
-background-color: rgba(0, 123, 255, 0.2);
-border-radius: 5px;
-color: #333;
+.meeting-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #007bff;
+  background-color: #f8f9fa;
+  border-radius: 5px;
 }
 
-/* Default style for calendar tiles */
-.react-calendar__tile {
-position: relative;
-padding: 10px;
-font-size: 14px;
-border-radius: 5px;
-transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+.meeting-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }
 
-
-.react-calendar__tile:hover {
-transform: scale(1.1); /* Slight zoom effect */
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-background-color: rgba(0, 123, 255, 0.1); /* Light blue background */
-cursor: pointer;
-}
-
-.react-calendar__tile.highlight-today:hover {
-background-color: #ffcccb; 
-box-shadow: 0 4px 12px rgba(255, 0, 0, 0.1); 
-transform: scale(1.2); 
-color: #000; 
-}
-
-.react-calendar__tile.meeting-date:hover {
-background-color: rgba(0, 255, 0, 0.2); 
-box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3); 
-transform: scale(1.1); 
-color: #333; 
-}
-
-
-/* button {
-  padding: 10px 20px;
+button {
   background-color: #007bff;
   color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-} */
+  margin-top: 20px;
+  transition: all 0.2s ease;
+}
 
-/* button:hover {
+button:hover {
   background-color: #0056b3;
-} */
-
-.light-green {
-  background-color: #d4edda;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.light-red {
-  background-color: #f8d7da;
+.user-dashboard, .meeting-details, .calendar-container {
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.light-yellow {
-  background-color: #fff3cd;
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-.popup form {
-  display: flex;
-  flex-direction: column;
-}
-.popup label {
-  margin-bottom: 10px;
-}
-.popup button {
-  margin: 5px 0;
-}
